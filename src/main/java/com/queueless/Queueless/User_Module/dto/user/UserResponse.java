@@ -1,4 +1,4 @@
-package com.queueless.Queueless.dto.user;
+package com.queueless.Queueless.User_Module.dto.user;
 
 import lombok.*;
 

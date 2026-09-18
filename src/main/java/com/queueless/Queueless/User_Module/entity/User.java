@@ -1,4 +1,4 @@
-package com.queueless.Queueless.entity;
+package com.queueless.Queueless.User_Module.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
