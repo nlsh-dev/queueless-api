@@ -1,4 +1,4 @@
-package com.queueless.QueueLess.entity;
+package com.queueless.Queueless.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -33,6 +33,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+
+
+
     @NotBlank(message = "Name is required")
     @Size(max = 100, message = "Name must not exceed 100 characters")
     @Column(
@@ -41,6 +45,12 @@ public class User {
             length = 100
     )
     private String name;
+
+
+
+
+
+
 
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
@@ -52,12 +62,20 @@ public class User {
     )
     private String email;
 
+
+
+
+
+
     @Size(max = 20, message = "Phone must not exceed 20 characters")
     @Column(
             name = "phone",
             length = 20
     )
     private String phone;
+
+
+
 
     @NotBlank(message = "Password hash is required")
     @Size(max = 255, message = "Password hash must not exceed 255 characters")
@@ -68,6 +86,9 @@ public class User {
     )
     private String passwordHash;
 
+
+
+
     @Column(
             name = "status",
             nullable = false,
@@ -75,6 +96,10 @@ public class User {
     )
     @Builder.Default
     private String status = "ACTIVE";
+
+
+
+
 
     @Column(
             name = "email_verified",
@@ -89,11 +114,17 @@ public class User {
     )
     private LocalDateTime createdAt;
 
+
+
+
+
     @Column(
             name = "updated_at",
             nullable = false
     )
     private LocalDateTime updatedAt;
+
+
 
 
     @PrePersist
