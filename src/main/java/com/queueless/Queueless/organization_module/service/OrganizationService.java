@@ -1,4 +1,4 @@
-package com.queueless.Queueless.organization_module.controller;
+package com.queueless.Queueless.organization_module.service;
 
 import com.queueless.Queueless.common_infrastructure.exception.ResourceNotFoundException;
 import com.queueless.Queueless.common_infrastructure.response.ApiResponse;
