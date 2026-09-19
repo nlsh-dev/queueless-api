@@ -22,4 +22,7 @@ public class OrganizationResponse {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+
+
 }
