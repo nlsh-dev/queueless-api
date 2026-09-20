@@ -1,56 +1,61 @@
-package com.queueless.Queueless.queue_module.entity;
+package com.queueless.Queueless.appointment_module.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
-@Table(
-        name = "queues",
-        uniqueConstraints = {
-                @UniqueConstraint(
-                        name = "uk_queue_service_date",
-                        columnNames = {"service_id", "queue_date"}
-                )
-        }
-)
+@Table(name = "appointments")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Queue {
+public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "User ID is required")
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
+
     @NotNull(message = "Service ID is required")
     @Column(name = "service_id", nullable = false)
     private Long serviceId;
 
-    @NotNull(message = "Queue date is required")
-    @Column(name = "queue_date", nullable = false)
-    private LocalDate queueDate;
+    @NotNull(message = "Appointment date is required")
+    @Column(name = "appointment_date", nullable = false)
+    private LocalDate appointmentDate;
+
+    @NotNull(message = "Start time is required")
+    @Column(name = "start_time", nullable = false)
+    private LocalTime startTime;
+
+    @NotNull(message = "End time is required")
+    @Column(name = "end_time", nullable = false)
+    private LocalTime endTime;
 
     @Column(name = "status", nullable = false, length = 20)
     @Builder.Default
-    private String status = "OPEN";
+    private String status = "BOOKED";
 
-    @Min(value = 1, message = "Next token number must be greater than 0")
-    @Column(name = "next_token_number", nullable = false)
-    @Builder.Default
-    private Integer nextTokenNumber = 1;
+    @Column(name = "notes", columnDefinition = "TEXT")
+    private String notes;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+    @Column(name = "cancelled_at")
+    private LocalDateTime cancelledAt;
 
     @PrePersist
     protected void onCreate() {
@@ -65,11 +70,7 @@ public class Queue {
         }
 
         if (status == null) {
-            status = "OPEN";
-        }
-
-        if (nextTokenNumber == null) {
-            nextTokenNumber = 1;
+            status = "BOOKED";
         }
     }
 
